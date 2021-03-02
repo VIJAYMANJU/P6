@@ -1,0 +1,21 @@
+import pandas as pd
+import numpy as np
+import csv
+#import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix,accuracy_score,f1_score,precision_score,recall_score
+from sklearn.model_selection import train_test_split
+data = pd.read_csv(r"C:\Users\manju\Desktop\ml labinternals\ML-Lab-NMIT\6\Student-University.csv")
+print(data)
+x=data.iloc[:,:-1]
+y=data.iloc[:,-1]
+x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=109,test_size=0.3)
+ml=LogisticRegression(random_state=0)
+ml.fit(x_train,y_train)
+y_pred=ml.predict(x_test)
+cm=confusion_matrix(y_test,y_pred)
+print(cm)
+print('accuracy:',accuracy_score(y_test,y_pred)*100)
+print('preasicion',precision_score(y_test,y_pred)*100)
+print('fcore',f1_score(y_test,y_pred)*100)
+
